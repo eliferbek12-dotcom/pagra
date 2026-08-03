@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoş Geldin!</title>
+</head>
+<body>
+    <h1>Merhaba {{ isim }}!</h1>
+
+    <script>
+        // Backend'e istek atan fetch kodu
+        fetch("http://127.0.0.1:5000/sohbet", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ soru: "Merhaba!" })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Bot cevabı:", data.cevap);
+        })
+        .catch(error => {
+            console.error("Hata:", error);
+        });
+    </script>
+
+</body>
+</html>
