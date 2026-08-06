@@ -14,16 +14,10 @@ def hakkinda():
 @main.route("/ai", methods=["GET", "POST"])
 def ai():
     if request.method == "POST":
-        # JSON'u zorla parse et → string gelmesini engeller
         data = request.get_json(force=True)
-
-        # JSON içindeki message alanını al
         message = data.get("message", "")
-
-        # Groq API çağrısı
         return ai_chat(message)
 
-    # GET isteği gelirse bilgilendirme döner
     return "Bu endpoint POST ile çalışır. Lütfen JSON gönderin."
 
 @main.route("/html")
@@ -48,9 +42,14 @@ def kullanici(id):
         "rol": "admin"
     }
 
-
-@main.route("/sohbet", methods=["POST"])
+# ⭐ DÜZGÜN /SOHBET ENDPOINTİ (GET + POST)
+@main.route("/sohbet", methods=["GET", "POST"])
 def sohbet():
+    if request.method == "GET":
+        return jsonify({
+            "durum": "GET isteği alındı, POST gönderin."
+        })
+
     data = request.get_json(force=True)
     soru = data.get("soru", "")
 
@@ -59,9 +58,3 @@ def sohbet():
     return jsonify({
         "cevap": cevap
     })
-
-    
-
-
-
-
