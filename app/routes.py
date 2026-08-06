@@ -54,10 +54,11 @@ def sohbet():
     data = request.get_json(force=True)
     soru = data.get("soru", "")
 
-    # Şimdilik test cevabı
-    cevap = f"Backend mesajı aldım: {soru}"
+    cevap = ai_chat(soru)
 
-    return jsonify({"cevap": cevap})
+    return jsonify({
+        "cevap": cevap
+    })
 
     
 
