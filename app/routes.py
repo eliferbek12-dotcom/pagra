@@ -2,10 +2,8 @@ from flask import Blueprint, request, render_template, jsonify
 from flask_cors import CORS
 from .services.ai_service import ai_chat
 
-# Blueprint oluştur
 main = Blueprint("main", __name__)
 
-# CORS'u blueprint'e uygula (Wix POST için şart)
 CORS(main)
 
 @main.route("/")
@@ -47,7 +45,7 @@ def kullanici(id):
         "rol": "admin"
     }
 
-# ⭐ Sohbet endpoint'i (Wix buraya POST atıyor)
+
 @main.route("/sohbet", methods=["GET", "POST"])
 def sohbet():
     if request.method == "GET":
