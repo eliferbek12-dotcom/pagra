@@ -45,7 +45,6 @@ def kullanici(id):
         "rol": "admin"
     }
 
-
 @main.route("/sohbet", methods=["GET", "POST"])
 def sohbet():
     if request.method == "GET":
@@ -60,4 +59,19 @@ def sohbet():
 
     return jsonify({
         "cevap": cevap
+    })
+
+@main.route("/demo-talep", methods=["POST"])
+def demo_talep():
+    data = request.get_json(force=True)
+    
+    ad_soyad = data.get("adSoyad", "")
+    telefon = data.get("telefon", "")
+    not_metni = data.get("not", "")
+
+    print(f"Yeni Demo Talebi -> Ad Soyad: {ad_soyad}, Tel: {telefon}, Not: {not_metni}")
+
+    return jsonify({
+        "durum": "basarili",
+        "mesaj": "Demo talebiniz başarıyla alındı."
     })
