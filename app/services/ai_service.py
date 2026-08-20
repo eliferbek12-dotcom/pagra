@@ -9,7 +9,7 @@ client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 def ai_chat(message: str):
     try:
         cevap = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="groq/compound",
             messages=[{"role": "user", "content": message}]
         )
         return cevap.choices[0].message.content
